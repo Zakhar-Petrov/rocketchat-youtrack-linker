@@ -1,0 +1,15 @@
+{
+    "id": "ccf6b242-87e4-432f-86bd-e1e94d8b8ee9",
+    "version": "1.0.0",
+    "requiredApiVersion": "^1.4.0",
+    "iconFile": "icon.png",
+    "author": {
+        "name": "Zakhar Petrov",
+        "homepage": "https://github.com/zakhar-petrov",
+        "support": "https://github.com/zakhar-petrov/rocketchat-youtrack-linker/issues"
+    },
+    "name": "YouTrack Linker",
+    "nameSlug": "youtrack-linker",
+    "classFile": "YouTrackLinkerApp.ts",
+    "description": "Turns YouTrack references into links."
+}
