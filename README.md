@@ -1,22 +1,31 @@
 # YouTrack Linker
 Turns YouTrack references into links.
 
-## Getting Started
-Now that you have generated a blank default Rocket.Chat App, what are you supposed to do next?
-Start developing! Open up your favorite editor, our recommended one is Visual Studio code,
-and start working on your App. Once you have something ready to test, you can either
-package it up and manually deploy it to your test instance or you can use the CLI to do so.
-Here are some commands to get started:
-- `rc-apps package`: this command will generate a packaged app file (zip) which can be installed **if** it compiles with TypeScript
-- `rc-apps deploy`: this will do what `package` does but will then ask you for your server url, username, and password to deploy it for you
+## Installation
+Make sure that you have Node already installed on your machine. To verify Node installation, use the following command in your terminal.
+```
+node -v
+# v10.15.3
+# It should return you a valid version.
+```
+Once you have installed Node, run the following command in your terminal to install the CLI globally.
+```
+npm install -g @rocket.chat/apps-cli
+```
+It will take a while to install the CLI depending upon your internet connection. After installation, run the following command to verify the installation.
+```
+rc-apps -v
+# @rocket.chat/apps-cli/1.4.0 darwin-x64 node-v10.15.3
+```
+Note that the response may vary depending upon your machine and environment, but it should look similar.
 
-## Documentation
-Here are some links to examples and documentation:
-- [Rocket.Chat Apps TypeScript Definitions Documentation](https://rocketchat.github.io/Rocket.Chat.Apps-engine/)
-- [Rocket.Chat Apps TypeScript Definitions Repository](https://github.com/RocketChat/Rocket.Chat.Apps-engine)
-- [Example Rocket.Chat Apps](https://github.com/graywolf336/RocketChatApps)
-- Community Forums
-  - [App Requests](https://forums.rocket.chat/c/rocket-chat-apps/requests)
-  - [App Guides](https://forums.rocket.chat/c/rocket-chat-apps/guides)
-  - [Top View of Both Categories](https://forums.rocket.chat/c/rocket-chat-apps)
-- [#rocketchat-apps on Open.Rocket.Chat](https://open.rocket.chat/channel/rocketchat-apps)
+Now you can deploy the application:
+```
+rc-apps deploy --url http://localhost:3000 --username <your_username> --password <your_password>
+```
+Or update:
+```
+rc-apps deploy --url http://localhost:3000 --username <your_username> --password <your_password>  --update
+```
+## Settings
+To start using the app you should set YouTrack base URL in the App Administration Page.
