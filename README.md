@@ -1,4 +1,5 @@
 [![Build status](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/workflows/build/badge.svg?branch=master)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/actions?query=workflow%3Abuild)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/raw/master/LICENSE)
 
 # YouTrack Linker
 Turns YouTrack references into links.
