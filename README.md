@@ -1,3 +1,5 @@
+[![Build status](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/workflows/build/badge.svg?branch=master)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/actions?query=workflow%3Abuild)
+
 # YouTrack Linker
 Turns YouTrack references into links.
 
