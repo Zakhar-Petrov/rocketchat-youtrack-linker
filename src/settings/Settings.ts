@@ -1,19 +1,17 @@
-import {ISetting, SettingType} from "@rocket.chat/apps-engine/definition/settings";
-import {ISettingsExtend} from "@rocket.chat/apps-engine/definition/accessors";
-import {ISettingRead} from "@rocket.chat/apps-engine/definition/accessors/ISettingRead";
+import {ISettingsExtend} from '@rocket.chat/apps-engine/definition/accessors';
+import {ISettingRead} from '@rocket.chat/apps-engine/definition/accessors/ISettingRead';
+import {ISetting, SettingType} from '@rocket.chat/apps-engine/definition/settings';
 
 export class Settings {
     public readonly excludePatterns: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
         '|\\`[^\\`]+\\`' +
         '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*';
-
-    private readonly baseUrlSettingId: string = 'base-url';
     public baseUrl: string;
-
-    private readonly issuePatternSettingId: string = 'issue-pattern';
     public issuePattern: string;
+    private readonly baseUrlSettingId: string = 'base-url';
+    private readonly issuePatternSettingId: string = 'issue-pattern';
 
-    async init(settings: ISettingsExtend) {
+    public async init(settings: ISettingsExtend) {
         await settings.provideSetting({
             id: this.baseUrlSettingId,
             type: SettingType.STRING,
@@ -34,7 +32,7 @@ export class Settings {
         });
     }
 
-    onUpdate(setting: ISetting) {
+    public onUpdate(setting: ISetting) {
         switch (setting.id) {
             case this.baseUrlSettingId:
                 this.extractedBaseUrl(setting.value);
@@ -45,8 +43,7 @@ export class Settings {
         }
     }
 
-
-    async setFrom(settings: ISettingRead) {
+    public async setFrom(settings: ISettingRead) {
         this.extractedBaseUrl(await settings.getValueById(this.baseUrlSettingId));
         this.extractedIssuePattern(await settings.getValueById(this.issuePatternSettingId));
     }

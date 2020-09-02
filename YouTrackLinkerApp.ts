@@ -6,13 +6,13 @@ import {
     ILogger,
     IMessageBuilder,
     IPersistence,
-    IRead
+    IRead,
 } from '@rocket.chat/apps-engine/definition/accessors';
 import {App} from '@rocket.chat/apps-engine/definition/App';
-import {IAppInfo} from '@rocket.chat/apps-engine/definition/metadata';
 import {IMessage, IPreMessageSentModify} from '@rocket.chat/apps-engine/definition/messages';
+import {IAppInfo} from '@rocket.chat/apps-engine/definition/metadata';
 import {ISetting} from '@rocket.chat/apps-engine/definition/settings';
-import {Settings} from "./settings/Settings";
+import {Settings} from './src/settings/Settings';
 
 export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
 
@@ -40,7 +40,7 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
         }
     }
 
-// tslint:disable-next-line:max-line-length
+    // tslint:disable-next-line:max-line-length
     public async executePreMessageSentModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
         if (typeof message.text !== 'string') {
             return message;
