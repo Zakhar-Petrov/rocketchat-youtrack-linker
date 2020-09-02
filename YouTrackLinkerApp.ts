@@ -26,8 +26,18 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
         if (typeof message.text !== 'string') {
             return false;
         }
-        const youTrackIssues = message.text.match(this.settings.issueMatcher);
-        return youTrackIssues != null && youTrackIssues.length > 0;
+
+        const issueMatcher = this.buildIssueMatcher();
+        while (true) {
+            const matchedResult = issueMatcher.exec(message.text);
+            if (!matchedResult) {
+                return false;
+            }
+            const issueSubgroup = matchedResult[1];
+            if (issueSubgroup) {
+                return true;
+            }
+        }
     }
 
 // tslint:disable-next-line:max-line-length
@@ -35,7 +45,25 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
         if (typeof message.text !== 'string') {
             return message;
         }
-        const text = message.text.replace(this.settings.issueMatcher, `[$1](${this.settings.baseUrl}/issue/$1)`);
+
+        const issueMatcher = this.buildIssueMatcher();
+        let text = message.text;
+        let offset = 0;
+        while (true) {
+            const matchedResult = issueMatcher.exec(message.text);
+            if (!matchedResult) {
+                break;
+            }
+            const issueSubgroup = matchedResult[1];
+            if (!issueSubgroup) {
+                continue;
+            }
+            const lengthBeforeReplacing = text.length;
+            text = text.substr(0, offset + matchedResult.index)
+                + `[${issueSubgroup}](${this.settings.baseUrl}/issue/${issueSubgroup})`
+                + text.substr(offset + matchedResult.index + matchedResult[1].length);
+            offset += text.length - lengthBeforeReplacing;
+        }
         return builder.setText(text).getMessage();
     }
 
@@ -52,6 +80,10 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
     // tslint:disable-next-line:max-line-length
     protected async extendConfiguration(configuration: IConfigurationExtend, environmentRead: IEnvironmentRead): Promise<void> {
         await this.settings.init(configuration.settings);
+    }
+
+    private buildIssueMatcher() {
+        return new RegExp(`${this.settings.excludePatterns}|(${this.settings.issuePattern})`, 'g');
     }
 
 }

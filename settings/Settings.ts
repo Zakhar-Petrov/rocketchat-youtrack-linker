@@ -3,12 +3,15 @@ import {ISettingsExtend} from "@rocket.chat/apps-engine/definition/accessors";
 import {ISettingRead} from "@rocket.chat/apps-engine/definition/accessors/ISettingRead";
 
 export class Settings {
+    public readonly excludePatterns: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
+        '|\\`[^\\`]+\\`' +
+        '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*';
+
     private readonly baseUrlSettingId: string = 'base-url';
     public baseUrl: string;
 
     private readonly issuePatternSettingId: string = 'issue-pattern';
     public issuePattern: string;
-    public issueMatcher: RegExp;
 
     async init(settings: ISettingsExtend) {
         await settings.provideSetting({
@@ -54,6 +57,5 @@ export class Settings {
 
     private extractedIssuePattern(value: string) {
         this.issuePattern = value;
-        this.issueMatcher = new RegExp(`(${value})`, 'g')
     }
 }
