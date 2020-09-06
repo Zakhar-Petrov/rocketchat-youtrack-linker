@@ -3,17 +3,20 @@ import {ISettingRead} from '@rocket.chat/apps-engine/definition/accessors/ISetti
 import {ISetting, SettingType} from '@rocket.chat/apps-engine/definition/settings';
 
 export class Settings {
-    public readonly excludePatterns: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
+    public static readonly DEFAULT_ISSUE_PATTERN: string = '[a-zA-Z]+-[0-9]+';
+    public static readonly EXCLUDE_PATTERNS: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
         '|\\`[^\\`]+\\`' +
         '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*';
+
+    public static readonly BASE_URL_SETTING_ID: string = 'base-url';
+    public static readonly ISSUE_PATTERN_SETTING_ID: string = 'issue-pattern';
+
     public baseUrl: string;
     public issuePattern: string;
-    private readonly baseUrlSettingId: string = 'base-url';
-    private readonly issuePatternSettingId: string = 'issue-pattern';
 
     public async init(settings: ISettingsExtend) {
         await settings.provideSetting({
-            id: this.baseUrlSettingId,
+            id: Settings.BASE_URL_SETTING_ID,
             type: SettingType.STRING,
             packageValue: '',
             required: true,
@@ -22,9 +25,9 @@ export class Settings {
             i18nDescription: 'YouTrack_Base_URL_Description',
         });
         await settings.provideSetting({
-            id: this.issuePatternSettingId,
+            id: Settings.ISSUE_PATTERN_SETTING_ID,
             type: SettingType.STRING,
-            packageValue: '[a-zA-Z]+-[0-9]+',
+            packageValue: Settings.DEFAULT_ISSUE_PATTERN,
             required: true,
             public: true,
             i18nLabel: 'Issue_Pattern',
@@ -34,18 +37,18 @@ export class Settings {
 
     public onUpdate(setting: ISetting) {
         switch (setting.id) {
-            case this.baseUrlSettingId:
+            case Settings.BASE_URL_SETTING_ID:
                 this.extractedBaseUrl(setting.value);
                 break;
-            case this.issuePatternSettingId:
+            case Settings.ISSUE_PATTERN_SETTING_ID:
                 this.extractedIssuePattern(setting.value);
                 break;
         }
     }
 
     public async setFrom(settings: ISettingRead) {
-        this.extractedBaseUrl(await settings.getValueById(this.baseUrlSettingId));
-        this.extractedIssuePattern(await settings.getValueById(this.issuePatternSettingId));
+        this.extractedBaseUrl(await settings.getValueById(Settings.BASE_URL_SETTING_ID));
+        this.extractedIssuePattern(await settings.getValueById(Settings.ISSUE_PATTERN_SETTING_ID));
     }
 
     private extractedBaseUrl(value: string) {

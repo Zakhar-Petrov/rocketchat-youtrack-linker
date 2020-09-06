@@ -83,7 +83,7 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
     }
 
     private buildIssueMatcher() {
-        return new RegExp(`${this.settings.excludePatterns}|(${this.settings.issuePattern})`, 'g');
+        return new RegExp(`${Settings.EXCLUDE_PATTERNS}|(${this.settings.issuePattern})`, 'g');
     }
 
 }
