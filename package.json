@@ -8,7 +8,7 @@
     "lint": "tslint --project '.'",
     "test": "mocha -r ts-node/register **/*.test.ts",
     "coverage": "nyc npm run test",
-    "coverall": "npm run coverage && nyc report --reporter=text-lcov | coverall",
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "package": "rc-apps package"
   },
   "pre-commit": [
