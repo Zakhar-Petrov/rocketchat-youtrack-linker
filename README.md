@@ -1,3 +1,6 @@
+[![Build status](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/workflows/build/badge.svg?branch=master)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/actions?query=workflow%3Abuild)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/raw/master/LICENSE)
+
 # YouTrack Linker
 Turns YouTrack references into links.
 
@@ -29,3 +32,6 @@ rc-apps deploy --url <rocketchat_url> --username <your_username> --password <you
 ```
 ## Settings
 To start using the app you should set YouTrack base URL in the App Administration Page.
+
+## License
+The code is available under the [MIT](https://raw.githubusercontent.com/zakhar-petrov/rocketchat-youtrack-linker/master/LICENSE) license.
