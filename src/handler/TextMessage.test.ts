@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import 'mocha';
 import {stub} from 'sinon';
-import {Settings} from "./Settings";
+import {Settings} from "../settings/Settings";
 import {TextMessage} from "./TextMessage";
 
 

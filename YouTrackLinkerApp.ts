@@ -12,34 +12,26 @@ import {App} from '@rocket.chat/apps-engine/definition/App';
 import {IMessage, IPreMessageSentModify} from '@rocket.chat/apps-engine/definition/messages';
 import {IAppInfo} from '@rocket.chat/apps-engine/definition/metadata';
 import {ISetting} from '@rocket.chat/apps-engine/definition/settings';
+import {MessageHandler} from './src/handler/MessageHandler';
+import {TextMessage} from './src/handler/TextMessage';
 import {Settings} from './src/settings/Settings';
-import {TextMessage} from './src/settings/TextMessage';
 
 export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
 
     private readonly settings: Settings = new Settings();
+    private readonly messageHandler: MessageHandler = new MessageHandler(this.settings);
 
     constructor(info: IAppInfo, logger: ILogger) {
         super(info, logger);
     }
 
     public async checkPreMessageSentModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {
-        if (typeof message.text !== 'string') {
-            return false;
-        }
-
-        return this.textMessage(message.text).hasIssues();
+        return this.messageHandler.checkPreMessageSentModify(message, read, http);
     }
 
     // tslint:disable-next-line:max-line-length
     public async executePreMessageSentModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
-        if (typeof message.text !== 'string') {
-            return message;
-        }
-
-        return this.textMessage(message.text).linkIssues().then(
-            (linkedText) => builder.setText(linkedText).getMessage(),
-        );
+        return this.messageHandler.executePreMessageSentModify(message, builder, read, http, persistence);
     }
 
     public async onEnable(environmentRead: IEnvironmentRead, configModify: IConfigurationModify): Promise<boolean> {
@@ -55,10 +47,6 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
     // tslint:disable-next-line:max-line-length
     protected async extendConfiguration(configuration: IConfigurationExtend, environmentRead: IEnvironmentRead): Promise<void> {
         await this.settings.init(configuration.settings);
-    }
-
-    private textMessage(text: string) {
-        return new TextMessage(this.settings, text);
     }
 
 }
