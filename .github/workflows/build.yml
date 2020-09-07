@@ -28,7 +28,7 @@ jobs:
     - run: npm install
     - run: npm run lint
     - run: npm run test
-    - run: nyc report --reporter=text-lcov | coverall
+    - run: npm run coverall
       if: matrix.node-version == '12.x'
       env:
         COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
