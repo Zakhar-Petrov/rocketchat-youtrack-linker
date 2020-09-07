@@ -30,6 +30,7 @@ describe('TextMessage', () => {
         'text text',
         'http://example.com/TEST-10',
         '```\nTEST-10\n```',
+        '~~~\nTEST-10\n~~~',
         '`TEST-10`',
     ];
 

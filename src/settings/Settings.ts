@@ -6,6 +6,7 @@ export class Settings {
 
     public static readonly DEFAULT_ISSUE_PATTERN: string = '[a-zA-Z]+-[0-9]+';
     public static readonly EXCLUDE_PATTERNS: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
+        '|\\~\\~\\~[^\\~]+\\~\\~\\~' +
         '|\\`[^\\`]+\\`' +
         '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*';
 
