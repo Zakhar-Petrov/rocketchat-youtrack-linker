@@ -1,8 +1,9 @@
 [![Build status](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/workflows/build/badge.svg?branch=master)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/actions?query=workflow%3Abuild)
+[![Coverage Status](https://coveralls.io/repos/github/zakhar-petrov/rocketchat-youtrack-linker/badge.svg?branch=refs/heads/master)](https://coveralls.io/github/zakhar-petrov/rocketchat-youtrack-linker?branch=refs/heads/master)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/raw/master/LICENSE)
 
 # YouTrack Linker
-Turns YouTrack references into links.
+RocketChat App to turn YouTrack references into links.
 
 ## Installation
 Make sure that you have Node already installed on your machine. To verify Node installation, use the following command in your terminal.
