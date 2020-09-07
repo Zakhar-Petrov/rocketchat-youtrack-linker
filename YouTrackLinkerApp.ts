@@ -13,6 +13,7 @@ import {IMessage, IPreMessageSentModify} from '@rocket.chat/apps-engine/definiti
 import {IAppInfo} from '@rocket.chat/apps-engine/definition/metadata';
 import {ISetting} from '@rocket.chat/apps-engine/definition/settings';
 import {Settings} from './src/settings/Settings';
+import {TextMessage} from './src/settings/TextMessage';
 
 export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
 
@@ -27,17 +28,7 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
             return false;
         }
 
-        const issueMatcher = this.buildIssueMatcher();
-        while (true) {
-            const matchedResult = issueMatcher.exec(message.text);
-            if (!matchedResult) {
-                return false;
-            }
-            const issueSubgroup = matchedResult[1];
-            if (issueSubgroup) {
-                return true;
-            }
-        }
+        return this.textMessage(message.text).hasIssues();
     }
 
     // tslint:disable-next-line:max-line-length
@@ -46,25 +37,9 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
             return message;
         }
 
-        const issueMatcher = this.buildIssueMatcher();
-        let text = message.text;
-        let offset = 0;
-        while (true) {
-            const matchedResult = issueMatcher.exec(message.text);
-            if (!matchedResult) {
-                break;
-            }
-            const issueSubgroup = matchedResult[1];
-            if (!issueSubgroup) {
-                continue;
-            }
-            const lengthBeforeReplacing = text.length;
-            text = text.substr(0, offset + matchedResult.index)
-                + `[${issueSubgroup}](${this.settings.baseUrl}/issue/${issueSubgroup})`
-                + text.substr(offset + matchedResult.index + matchedResult[1].length);
-            offset += text.length - lengthBeforeReplacing;
-        }
-        return builder.setText(text).getMessage();
+        return this.textMessage(message.text).linkIssues().then(
+            (linkedText) => builder.setText(linkedText).getMessage(),
+        );
     }
 
     public async onEnable(environmentRead: IEnvironmentRead, configModify: IConfigurationModify): Promise<boolean> {
@@ -82,8 +57,8 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
         await this.settings.init(configuration.settings);
     }
 
-    private buildIssueMatcher() {
-        return new RegExp(`${Settings.EXCLUDE_PATTERNS}|(${this.settings.issuePattern})`, 'g');
+    private textMessage(text: string) {
+        return new TextMessage(this.settings, text);
     }
 
 }
