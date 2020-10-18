@@ -1,4 +1,5 @@
 import {Settings} from '../settings/Settings';
+import {IssueIterator} from './IssueIterator';
 
 export class TextMessage {
 
@@ -11,46 +12,38 @@ export class TextMessage {
     }
 
     public async hasIssues(): Promise<boolean> {
-        const issueMatcher = this.buildIssueMatcher();
-        while (true) {
-            const matchedResult = this.matchedResult(issueMatcher);
-            if (!matchedResult) {
-                return false;
-            }
-            const issueSubgroup = matchedResult[1];
-            if (issueSubgroup) {
-                return true;
-            }
-        }
+        return !this.issueIterator().next().done;
     }
 
     public async linkIssues(): Promise<string> {
-        const issueMatcher = this.buildIssueMatcher();
-        let result = this.text;
+        let text = this.text;
         let offset = 0;
-        while (true) {
-            const matchedResult = this.matchedResult(issueMatcher);
-            if (!matchedResult) {
-                break;
-            }
-            const issueSubgroup = matchedResult[1];
-            if (!issueSubgroup) {
-                continue;
-            }
-            const lengthBeforeReplacing = result.length;
-            result = result.substr(0, offset + matchedResult.index)
-                + `[${issueSubgroup}](${this.settings.baseUrl}/issue/${issueSubgroup})`
-                + result.substr(offset + matchedResult.index + matchedResult[1].length);
-            offset += result.length - lengthBeforeReplacing;
+
+        for (const issue of this.issueIterator()) {
+            const lengthBeforeReplacing = text.length;
+            const issueIndex = issue!.index;
+            const issueText = issue!.text;
+            text = textBefore(issueIndex)
+                + this.markdownIssueLink(issueText)
+                + textAfter(issueIndex + issueText.length);
+            offset += text.length - lengthBeforeReplacing;
         }
-        return result;
+        return text;
+
+        function textBefore(index) {
+            return text.substr(0, offset + index);
+        }
+
+        function textAfter(index) {
+            return text.substr(offset + index);
+        }
     }
 
-    private buildIssueMatcher() {
-        return new RegExp(`${Settings.EXCLUDE_PATTERNS}|(${this.settings.issuePattern})`, 'g');
+    private issueIterator() {
+        return new IssueIterator(this.text, this.settings.issuePattern, Settings.EXCLUDE_PATTERNS);
     }
 
-    private matchedResult(issueMatcher: RegExp) {
-        return issueMatcher.exec(this.text);
+    private markdownIssueLink(issueText) {
+        return `[${issueText}](${this.settings.baseUrl}/issue/${issueText})`;
     }
 }

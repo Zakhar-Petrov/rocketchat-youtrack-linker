@@ -18,6 +18,7 @@ describe('Settings', () => {
 
             expect(settings.baseUrl).to.equal(baseUrl);
             expect(settings.issuePattern).to.be.undefined;
+            expect(settings.maxSearchAttempts).to.be.undefined;
         });
 
         it('should set issue pattern', () => {
@@ -29,6 +30,19 @@ describe('Settings', () => {
 
             expect(settings.issuePattern).to.equal(issuePattern);
             expect(settings.baseUrl).to.be.undefined;
+            expect(settings.maxSearchAttempts).to.be.undefined;
+        });
+
+        it('should set max search attempts', () => {
+            const settings = new Settings();
+            const maxSearchAttempts = 123;
+            const setting = {'id': Settings.MAX_SEARCH_ATTEMPTS_ID, 'value': maxSearchAttempts} as ISetting;
+
+            settings.onUpdate(setting);
+
+            expect(settings.maxSearchAttempts).to.equal(maxSearchAttempts);
+            expect(settings.baseUrl).to.be.undefined;
+            expect(settings.issuePattern).to.be.undefined;
         });
 
         it('should set nothing', () => {
@@ -39,6 +53,7 @@ describe('Settings', () => {
 
             should().not.exist(settings.baseUrl);
             should().not.exist(settings.issuePattern);
+            should().not.exist(settings.maxSearchAttempts);
         });
     });
 
@@ -59,6 +74,7 @@ describe('Settings', () => {
 
             expect(settings.baseUrl).to.equal(baseUrl);
             should().not.exist(settings.issuePattern);
+            should().not.exist(settings.maxSearchAttempts);
         });
 
         it('should set issue pattern', async () => {
@@ -77,6 +93,26 @@ describe('Settings', () => {
 
             expect(settings.issuePattern).to.equal(issuePattern);
             should().not.exist(settings.baseUrl);
+            should().not.exist(settings.maxSearchAttempts);
+        });
+
+        it('should set max search attempts', async () => {
+            const settings = new Settings();
+            const maxSearchAttempts = 123;
+            const settingRead = {
+                async getValueById(id: string): Promise<any> {
+                    if (id === Settings.MAX_SEARCH_ATTEMPTS_ID) {
+                        return maxSearchAttempts;
+                    }
+                    return null;
+                }
+            } as ISettingRead;
+
+            await settings.setFrom(settingRead);
+
+            expect(settings.maxSearchAttempts).to.equal(maxSearchAttempts);
+            should().not.exist(settings.baseUrl);
+            should().not.exist(settings.issuePattern);
         });
 
         it('should set nothing', async () => {
@@ -91,6 +127,7 @@ describe('Settings', () => {
 
             should().not.exist(settings.baseUrl);
             should().not.exist(settings.issuePattern);
+            should().not.exist(settings.maxSearchAttempts);
         });
     });
 
@@ -115,7 +152,7 @@ describe('Settings', () => {
 
             await settings.init(settingExtend);
 
-            expect(provideSetting.calledTwice).to.be.true;
+            expect(provideSetting.callCount).to.equal(3);
             const baseUrlSetting = provideSetting.getCall(0).args[0];
             expect(baseUrlSetting.id).to.equal(Settings.BASE_URL_SETTING_ID);
             expect(baseUrlSetting.type).to.equal(SettingType.STRING);
@@ -132,6 +169,14 @@ describe('Settings', () => {
             expect(issuePatternSetting.public).to.be.true;
             expect(issuePatternSetting.i18nLabel).to.equal('Issue_Pattern');
             expect(issuePatternSetting.i18nDescription).to.equal('Issue_Pattern_Description');
+            const maxSearchAttemptsSetting = provideSetting.getCall(2).args[0];
+            expect(maxSearchAttemptsSetting.id).to.equal(Settings.MAX_SEARCH_ATTEMPTS_ID);
+            expect(maxSearchAttemptsSetting.type).to.equal(SettingType.NUMBER);
+            expect(maxSearchAttemptsSetting.packageValue).to.equal(Settings.DEFAULT_MAX_SEARCH_ATTEMPTS);
+            expect(maxSearchAttemptsSetting.required).to.be.true;
+            expect(maxSearchAttemptsSetting.public).to.be.true;
+            expect(maxSearchAttemptsSetting.i18nLabel).to.equal('Max_Search_Attempts');
+            expect(maxSearchAttemptsSetting.i18nDescription).to.equal('Max_Search_Attempts_Description');
         });
     });
 });

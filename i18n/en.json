@@ -2,5 +2,7 @@
   "YouTrack_Base_URL": "YouTrack URL",
   "YouTrack_Base_URL_Description": "YouTrack base URL",
   "Issue_Pattern": "Issue pattern",
-  "Issue_Pattern_Description": "Regex pattern to match issues"
+  "Issue_Pattern_Description": "Regex pattern to match issues",
+  "Max_Search_Attempts": "Max search attempts",
+  "Max_Search_Attempts_Description": "Issues search attempts limit"
 }
