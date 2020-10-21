@@ -40,7 +40,11 @@ export class TextMessage {
     }
 
     private issueIterator() {
-        return new IssueIterator(this.text, this.settings.issuePattern, Settings.EXCLUDE_PATTERNS);
+        return new IssueIterator(
+            this.text,
+            this.settings.issuePattern,
+            Settings.EXCLUDE_PATTERNS,
+            this.settings.maxSearchAttempts);
     }
 
     private markdownIssueLink(issueText) {
