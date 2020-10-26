@@ -46,13 +46,6 @@ describe('MessageHandler', () => {
             expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
         });
         it('should return false', async () => {
-            message.text = null;
-            const messageHandler = new MessageHandler(settings);
-
-            // tslint:disable-next-line: no-unused-expression
-            expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
-        });
-        it('should return false', async () => {
             message.text = undefined;
             const messageHandler = new MessageHandler(settings);
 
@@ -68,13 +61,6 @@ describe('MessageHandler', () => {
 
             expect(await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence))
                 .to.not.equal(message);
-        });
-        it('should return the same', async () => {
-            message.text = null;
-            const messageHandler = new MessageHandler(settings);
-
-            expect(await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence))
-                .to.equal(message);
         });
         it('should return the same', async () => {
             message.text = undefined;
