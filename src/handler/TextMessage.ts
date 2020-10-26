@@ -30,11 +30,11 @@ export class TextMessage {
         }
         return text;
 
-        function textBefore(index) {
+        function textBefore(index: number) {
             return text.substr(0, offset + index);
         }
 
-        function textAfter(index) {
+        function textAfter(index: number) {
             return text.substr(offset + index);
         }
     }
@@ -47,7 +47,7 @@ export class TextMessage {
             this.settings.maxSearchAttempts);
     }
 
-    private markdownIssueLink(issueText) {
+    private markdownIssueLink(issueText: string) {
         return `[${issueText}](${this.settings.baseUrl}/issue/${issueText})`;
     }
 }

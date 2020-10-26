@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {IssueIterator} from "./IssueIterator";
+import {IssueIterator} from './IssueIterator';
 
 function iterationsOf(issueIterator: IssueIterator) {
-    const iterations: { text: string, index: number }[] = [];
+    const iterations: Array<{ text: string, index: number }> = [];
 
     for (const result of issueIterator) {
         iterations.push(result!);
@@ -14,13 +14,13 @@ describe('IssueIterator', () => {
     const text = 'test0 qwerty test1 asdfgh test2 (test3)';
 
     it('has all iterations', () => {
-        const expectedIterations: { text: string, index: number }[] = [
+        const expectedIterations: Array<{ text: string, index: number }> = [
             {text: 'test0', index: 0},
             {text: 'test1', index: 13},
             {text: 'test2', index: 26},
             {text: 'test3', index: 33},
         ];
-        const issueIterator = new IssueIterator(text, 'test[0-9]')
+        const issueIterator = new IssueIterator(text, 'test[0-9]');
 
         const iterations = iterationsOf(issueIterator);
 
@@ -28,12 +28,12 @@ describe('IssueIterator', () => {
     });
 
     it('has iterations without excluded matches', () => {
-        const expectedIterations: { text: string, index: number }[] = [
+        const expectedIterations: Array<{ text: string, index: number }> = [
             {text: 'test0', index: 0},
             {text: 'test2', index: 26},
             {text: 'test3', index: 33},
         ];
-        const issueIterator = new IssueIterator(text, 'test[0-9]', 'test1')
+        const issueIterator = new IssueIterator(text, 'test[0-9]', 'test1');
 
         const iterations = iterationsOf(issueIterator);
 
@@ -41,7 +41,7 @@ describe('IssueIterator', () => {
     });
 
     it('has defined max search attempts', () => {
-        const issueIterator = new IssueIterator(text, 'test[0-9]', undefined, 3)
+        const issueIterator = new IssueIterator(text, 'test[0-9]', undefined, 3);
 
         const iterations = iterationsOf(issueIterator);
 

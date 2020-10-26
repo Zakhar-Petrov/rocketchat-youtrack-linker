@@ -5,7 +5,7 @@ export class IssueIterator {
     private readonly maxSearchAttempts: number;
     private searchAttemptsCount: number = 0;
 
-    constructor(text, issuePattern, excludePatterns: string = '', maxSearchAttempts = 25) {
+    constructor(text: string, issuePattern: string, excludePatterns: string = '', maxSearchAttempts = 25) {
         this.text = text;
         const pattern = (excludePatterns && excludePatterns.length > 0 ? excludePatterns + '|' : '')
             + `(${issuePattern})`;

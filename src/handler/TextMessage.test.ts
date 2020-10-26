@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import 'mocha';
 import {stub} from 'sinon';
-import {Settings} from "../settings/Settings";
-import {TextMessage} from "./TextMessage";
-
+import {Settings} from '../settings/Settings';
+import {TextMessage} from './TextMessage';
 
 describe('TextMessage', () => {
-    let settings;
+    let settings: Settings;
 
-    beforeEach(function () {
+    beforeEach(() => {
         settings = new Settings();
         stub(settings, 'baseUrl').get(function baseUrl() {
             return 'http://example.com';
@@ -35,25 +34,27 @@ describe('TextMessage', () => {
     ];
 
     describe('#hasIssues', () => {
-        positiveParams.forEach(function (text) {
+        positiveParams.forEach((text) => {
             it(`should return true for: '${text.replace(/\n/g, '\\n')}'`, async () => {
                 const textMessage = new TextMessage(settings, text);
 
+                // tslint:disable-next-line: no-unused-expression
                 expect(await textMessage.hasIssues()).to.be.true;
             });
         });
 
-        negativeParams.forEach(function (text) {
+        negativeParams.forEach((text) => {
             it(`should return false for: '${text.replace(/\n/g, '\\n')}'`, async () => {
                 const textMessage = new TextMessage(settings, text);
 
+                // tslint:disable-next-line: no-unused-expression
                 expect(await textMessage.hasIssues()).to.be.false;
             });
         });
     });
 
     describe('#linkIssues', () => {
-        positiveParams.forEach(function (text) {
+        positiveParams.forEach((text) => {
             it(`should link issues for: '${text.replace(/\n/g, '\\n')}'`, async () => {
                 const textMessage = new TextMessage(settings, text);
 
@@ -62,7 +63,7 @@ describe('TextMessage', () => {
             });
         });
 
-        negativeParams.forEach(function (text) {
+        negativeParams.forEach((text) => {
             it(`should not link issues for: '${text.replace(/\n/g, '\\n')}'`, async () => {
                 const textMessage = new TextMessage(settings, text);
 
