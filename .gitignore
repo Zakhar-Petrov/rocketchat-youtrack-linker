@@ -26,3 +26,12 @@ out/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# vscode
+vscode
+
+# Repository specific
+coverage
+.vscode
+.nyc_output
+node_modules
