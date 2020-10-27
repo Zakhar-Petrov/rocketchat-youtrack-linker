@@ -8,21 +8,21 @@ import {
     IPersistence,
     IRead,
 } from '@rocket.chat/apps-engine/definition/accessors';
-import {App} from '@rocket.chat/apps-engine/definition/App';
-import {IMessage, IPreMessageSentModify} from '@rocket.chat/apps-engine/definition/messages';
-import {IAppInfo} from '@rocket.chat/apps-engine/definition/metadata';
-import {ISetting} from '@rocket.chat/apps-engine/definition/settings';
-import {MessageHandler} from './src/handler/MessageHandler';
-import {TextMessage} from './src/handler/TextMessage';
-import {Settings} from './src/settings/Settings';
+import { App } from '@rocket.chat/apps-engine/definition/App';
+import { IMessage, IPreMessageSentModify } from '@rocket.chat/apps-engine/definition/messages';
+import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
+import { ISetting } from '@rocket.chat/apps-engine/definition/settings';
+import { MessageHandler } from './src/handler/MessageHandler';
+import { Settings } from './src/settings/Settings';
 
 export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
 
     private readonly settings: Settings = new Settings();
-    private readonly messageHandler: MessageHandler = new MessageHandler(this.settings);
+    private readonly messageHandler: MessageHandler;
 
     constructor(info: IAppInfo, logger: ILogger) {
         super(info, logger);
+        this.messageHandler = new MessageHandler(this.settings);
     }
 
     public async checkPreMessageSentModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {

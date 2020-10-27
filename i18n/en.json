@@ -4,5 +4,7 @@
   "Issue_Pattern": "Issue pattern",
   "Issue_Pattern_Description": "Regex pattern to match issues",
   "Max_Search_Attempts": "Max search attempts",
-  "Max_Search_Attempts_Description": "Issues search attempts limit"
+  "Max_Search_Attempts_Description": "Issues search attempts limit",
+  "Modify_Attachments": "Modify attachments text",
+  "Modify_Attachments_Description": "Enable to link issues in message attachments"
 }
