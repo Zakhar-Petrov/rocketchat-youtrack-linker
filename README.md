@@ -25,11 +25,11 @@ Note that the response may vary depending upon your machine and environment, but
 
 Now you can deploy the application:
 ```
-rc-apps deploy --url <rocketchat_url> --username <your_username> --password <your_password>
+rc-apps deploy --url <rocketchat_url>
 ```
 Or update:
 ```
-rc-apps deploy --url <rocketchat_url> --username <your_username> --password <your_password>  --update
+rc-apps deploy --url <rocketchat_url> --update
 ```
 ## Settings
 To start using the app you should set YouTrack base URL in the App Administration Page.
