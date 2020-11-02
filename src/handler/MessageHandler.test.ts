@@ -110,16 +110,23 @@ describe('MessageHandler', () => {
                 // tslint:disable-next-line: no-unused-expression
                 expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
             });
-            it('undefinded message text and no any issue in attachment', async () => {
+            it('undefinded message text and no any attachment', async () => {
                 message.text = undefined;
-                message.attachments = [{ text: 'There is no any issue in attachment' }];
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
                 expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
             });
-            it('undefinded message text and no any attachment', async () => {
+            it('empty message text and no any attachment', async () => {
+                message.text = '';
+                const messageHandler = new MessageHandler(settings);
+
+                // tslint:disable-next-line: no-unused-expression
+                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+            });
+            it('undefinded message text and no any issue in attachment', async () => {
                 message.text = undefined;
+                message.attachments = [{ text: 'There is no any issue in attachment' }];
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
