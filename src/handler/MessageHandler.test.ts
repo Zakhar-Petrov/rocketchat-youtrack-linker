@@ -189,6 +189,22 @@ describe('MessageHandler', () => {
             expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.eql(message.attachments);
         });
+        it('should return the same attachment', async () => {
+            message.text = '';
+            message.attachments = [{ text: undefined }];
+            const messageHandler = new MessageHandler(settings);
+
+            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+                .to.eql(message.attachments);
+        });
+        it('should return the same attachment', async () => {
+            message.text = '';
+            message.attachments = [{ text: '' }];
+            const messageHandler = new MessageHandler(settings);
+
+            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+                .to.eql(message.attachments);
+        });
 
         it('should return changed message text and attachment', async () => {
             message.text = 'There is an issue in message text: TEST-10';
