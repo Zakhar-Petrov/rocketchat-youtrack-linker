@@ -1,28 +1,33 @@
 [![Build status](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/workflows/build/badge.svg?branch=master)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/actions?query=workflow%3Abuild)
 [![Coverage Status](https://coveralls.io/repos/github/zakhar-petrov/rocketchat-youtrack-linker/badge.svg?branch=refs/heads/master)](https://coveralls.io/github/zakhar-petrov/rocketchat-youtrack-linker?branch=refs/heads/master)
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/raw/master/LICENSE)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE?raw=true)
 
 # YouTrack Linker
 RocketChat App to turn YouTrack references into links.
 
 ## Installation
-Make sure that you have Node already installed on your machine. To verify Node installation, use the following command in your terminal.
-```
-node -v
-# v10.15.3
-# It should return you a valid version.
-```
-Once you have installed Node, run the following command in your terminal to install the CLI globally.
+Enable Apps development mode by navigating to `Administration > General` then scroll down to Apps and click on the True radio button over the Enable development mode.
+
+### Install using Administration page
+Download ZIP archive `youtrack-linker_<version>.zip` from [latest release](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/releases/latest).
+
+Open `Administration > Apps` and press `Upload App` button.
+
+![alt text](doc/images/installation-apps.png?raw=true)
+
+Browse downloaded ZIP file and press `Install`.
+
+![alt text](doc/images/installation-upload-app.png?raw=true)
+
+### Install using command line
+Make sure that you have Node already installed on your machine. Once you have installed Node, run the following command in your terminal to install `rc-apps` globally:
 ```
 npm install -g @rocket.chat/apps-cli
 ```
-It will take a while to install the CLI depending upon your internet connection. After installation, run the following command to verify the installation.
+Clone repository and run the following command:
 ```
-rc-apps -v
-# @rocket.chat/apps-cli/1.4.0 darwin-x64 node-v10.15.3
+npm install
 ```
-Note that the response may vary depending upon your machine and environment, but it should look similar.
-
 Now you can deploy the application:
 ```
 rc-apps deploy --url <rocketchat_url>
@@ -35,4 +40,4 @@ rc-apps deploy --url <rocketchat_url> --update
 To start using the app you should set YouTrack base URL in the App Administration Page.
 
 ## License
-The code is available under the [MIT](https://raw.githubusercontent.com/zakhar-petrov/rocketchat-youtrack-linker/master/LICENSE) license.
+The code is available under the [MIT](LICENSE?raw=true) license.
