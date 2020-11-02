@@ -13,11 +13,11 @@ Download ZIP archive `youtrack-linker_<version>.zip` from [latest release](https
 
 Open `Administration > Apps` and press `Upload App` button.
 
-![alt text](doc/images/installation-apps.png?raw=true)
+![](doc/images/installation-apps.png?raw=true | width=48)
 
 Browse downloaded ZIP file and press `Install`.
 
-![alt text](doc/images/installation-upload-app.png?raw=true)
+![](doc/images/installation-upload-app.png?raw=true | width=48)
 
 ### Install using command line
 Make sure that you have Node already installed on your machine. Once you have installed Node, run the following command in your terminal to install `rc-apps` globally:
