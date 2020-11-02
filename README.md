@@ -2,13 +2,19 @@
 [![Coverage Status](https://coveralls.io/repos/github/zakhar-petrov/rocketchat-youtrack-linker/badge.svg?branch=refs/heads/master)](https://coveralls.io/github/zakhar-petrov/rocketchat-youtrack-linker?branch=refs/heads/master)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE?raw=true)
 
+- [Installation](#installation)
+  - [Using Administration page](#using-administration-page)
+  - [Using command line](#using-command-line)
+- [Settings](#settings)
+- [License](#license)
+
 # YouTrack Linker
 RocketChat App to turn YouTrack references into links.
 
 ## Installation
 Enable Apps development mode by navigating to `Administration > General` then scroll down to Apps and click on the True radio button over the Enable development mode.
 
-### Install using Administration page
+### Using Administration page
 Download ZIP archive `youtrack-linker_<version>.zip` from [latest release](https://github.com/zakhar-petrov/rocketchat-youtrack-linker/releases/latest).
 
 Open `Administration > Apps` and press `Upload App` button.
@@ -19,7 +25,7 @@ Browse downloaded ZIP file and press `Install`.
 
 <img src="doc/images/installation-upload-app.png" width="50%">
 
-### Install using command line
+### Using command line
 Make sure that you have Node already installed on your machine. Once you have installed Node, run the following command in your terminal to install `rc-apps` globally:
 ```
 npm install -g @rocket.chat/apps-cli
