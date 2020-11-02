@@ -41,17 +41,11 @@ export class MessageHandler implements IPreMessageSentModify {
     }
 
     private async hasIssues(text: string): Promise<boolean> {
-        if (text.length > 0) {
-            return this.textMessage(text).hasIssues();
-        }
-        return false;
+        return this.textMessage(text).hasIssues();
     }
 
     private async modifyText(text: string): Promise<string> {
-        if (text.length > 0) {
-            return this.textMessage(text).linkIssues();
-        }
-        return text;
+        return this.textMessage(text).linkIssues();
     }
 
     private async modifyAttachments(attachments: Array<IMessageAttachment>): Promise<Array<IMessageAttachment>> {
