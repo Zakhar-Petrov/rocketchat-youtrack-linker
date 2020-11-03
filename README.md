@@ -45,5 +45,7 @@ rc-apps deploy --url <rocketchat_url> --update
 ## Settings
 To start using the app you should set YouTrack base URL in the App Administration Page.
 
+<img src="doc/images/settings.png" width="50%">
+
 ## License
 The code is available under the [MIT](LICENSE?raw=true) license.
