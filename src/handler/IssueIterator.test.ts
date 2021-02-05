@@ -1,5 +1,5 @@
-import {expect} from 'chai';
-import {IssueIterator} from './IssueIterator';
+import { expect } from 'chai';
+import { IssueIterator } from './IssueIterator';
 
 function iterationsOf(issueIterator: IssueIterator) {
     const iterations: Array<{ text: string, index: number }> = [];

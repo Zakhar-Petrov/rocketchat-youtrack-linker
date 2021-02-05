@@ -2,11 +2,10 @@ import { IHttp, IMessageBuilder, IPersistence, IRead } from '@rocket.chat/apps-e
 import { IMessage, IMessageAttachment } from '@rocket.chat/apps-engine/definition/messages';
 import { expect } from 'chai';
 import 'mocha';
-import { stringify } from 'querystring';
-
 import { stub } from 'sinon';
 import { Settings } from '../settings/Settings';
 import { MessageHandler } from './MessageHandler';
+
 
 describe('MessageHandler', () => {
     let settings: Settings;

@@ -1,5 +1,5 @@
-import {Settings} from '../settings/Settings';
-import {IssueIterator} from './IssueIterator';
+import { Settings } from '../settings/Settings';
+import { IssueIterator } from './IssueIterator';
 
 export class TextMessage {
 
