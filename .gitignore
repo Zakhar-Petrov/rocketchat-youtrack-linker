@@ -1,5 +1,14 @@
 # ignore modules pulled in from npm
-youtrack-linker/node_modules/
+node_modules/
+
+# nyc
+.nyc_output/
+
+# coverage
+coverage/
+
+# Visual Studio Code
+.vscode/
 
 # rc-apps package output
 dist/
