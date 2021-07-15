@@ -23,6 +23,15 @@ describe('TextMessage', () => {
         '~TEST-10~',
         'text TEST-10 text',
         'text TEST-10 text TEST-10',
+        '[TEST-10]',
+        'TEST-10',
+        ' TEST-10 ',
+        ',TEST-10,',
+        ';TEST-10;',
+        ':TEST-10:',
+        '.TEST-10.',
+        '!TEST-10!',
+        '?TEST-10?',
     ];
 
     const negativeParams = [
@@ -31,6 +40,11 @@ describe('TextMessage', () => {
         '```\nTEST-10\n```',
         '~~~\nTEST-10\n~~~',
         '`TEST-10`',
+        'abc123-456def-789ghi-jkl',
+        'ABC-123ABC-123',
+        '0ABC-123',
+        'ABC-123A',
+        '[ABC-123](test)'
     ];
 
     describe('#hasIssues', () => {
