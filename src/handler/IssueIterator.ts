@@ -26,9 +26,9 @@ export class IssueIterator {
 
             const issueSubgroup = matchResult[1];
             if (issueSubgroup) {
-                return {value: {text: issueSubgroup, index: matchResult.index}, done: false};
+                return { value: { text: issueSubgroup, index: matchResult.index }, done: false };
             }
         }
-        return {value: undefined, done: true};
+        return { value: undefined, done: true };
     }
 }

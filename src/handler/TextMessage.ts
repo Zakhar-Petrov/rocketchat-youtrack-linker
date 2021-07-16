@@ -42,12 +42,16 @@ export class TextMessage {
     private issueIterator() {
         return new IssueIterator(
             this.text,
-            this.settings.issuePattern,
+            this.buildIssuePattern(),
             Settings.EXCLUDE_PATTERNS,
             this.settings.maxSearchAttempts);
     }
 
     private markdownIssueLink(issueText: string) {
         return `[${issueText}](${this.settings.baseUrl}/issue/${issueText})`;
+    }
+
+    private buildIssuePattern() {
+        return Settings.POSITIVE_LOOKBEHIND + this.settings.issuePattern + Settings.POSITIVE_LOOKAHEAD;
     }
 }

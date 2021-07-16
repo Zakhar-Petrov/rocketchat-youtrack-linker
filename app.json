@@ -1,7 +1,7 @@
 {
     "id": "9408b583-2f0e-4987-a341-daa171d761ce",
-    "version": "1.1.0",
-    "requiredApiVersion": "^1.4.0",
+    "version": "1.2.0",
+    "requiredApiVersion": "^1.12.0",
     "iconFile": "icon.png",
     "author": {
         "name": "Zakhar Petrov",
@@ -11,5 +11,8 @@
     "name": "YouTrack Linker",
     "nameSlug": "youtrack-linker",
     "classFile": "YouTrackLinkerApp.ts",
-    "description": "Turns YouTrack references into links."
+    "description": "Turns YouTrack references into links.",
+    "implements": [
+        "IPreMessageSentModify"
+    ]
 }

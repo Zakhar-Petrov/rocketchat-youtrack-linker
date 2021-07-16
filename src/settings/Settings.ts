@@ -7,7 +7,10 @@ export class Settings {
     public static readonly EXCLUDE_PATTERNS: string = '\\`\\`\\`[^\\`]+\\`\\`\\`' +
         '|\\~\\~\\~[^\\~]+\\~\\~\\~' +
         '|\\`[^\\`]+\\`' +
-        '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*';
+        '|[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_\\+.~#?&//=]*' +
+        '|\\[[^\\[\\]]+\\]\\([^\\(\\)]+\\)';
+    public static readonly POSITIVE_LOOKBEHIND: string = '(?<=^|[^a-zA-Z0-9])';
+    public static readonly POSITIVE_LOOKAHEAD: string = '(?=[^a-zA-Z0-9]|$)';
 
     public static readonly DEFAULT_BASE_URL: string = '';
     public static readonly DEFAULT_ISSUE_PATTERN: string = '[a-zA-Z]+-[0-9]+';

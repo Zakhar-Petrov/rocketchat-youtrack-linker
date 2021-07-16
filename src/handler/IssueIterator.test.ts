@@ -15,10 +15,10 @@ describe('IssueIterator', () => {
 
     it('has all iterations', () => {
         const expectedIterations: Array<{ text: string, index: number }> = [
-            {text: 'test0', index: 0},
-            {text: 'test1', index: 13},
-            {text: 'test2', index: 26},
-            {text: 'test3', index: 33},
+            { text: 'test0', index: 0 },
+            { text: 'test1', index: 13 },
+            { text: 'test2', index: 26 },
+            { text: 'test3', index: 33 },
         ];
         const issueIterator = new IssueIterator(text, 'test[0-9]');
 
@@ -29,9 +29,9 @@ describe('IssueIterator', () => {
 
     it('has iterations without excluded matches', () => {
         const expectedIterations: Array<{ text: string, index: number }> = [
-            {text: 'test0', index: 0},
-            {text: 'test2', index: 26},
-            {text: 'test3', index: 33},
+            { text: 'test0', index: 0 },
+            { text: 'test2', index: 26 },
+            { text: 'test3', index: 33 },
         ];
         const issueIterator = new IssueIterator(text, 'test[0-9]', 'test1');
 
