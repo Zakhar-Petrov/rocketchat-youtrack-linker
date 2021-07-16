@@ -44,3 +44,4 @@ coverage
 .vscode
 .nyc_output
 node_modules
+.rcappsconfig
