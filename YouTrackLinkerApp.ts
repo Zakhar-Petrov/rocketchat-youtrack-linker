@@ -9,13 +9,13 @@ import {
     IRead,
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
-import { IMessage, IPreMessageSentModify } from '@rocket.chat/apps-engine/definition/messages';
+import { IMessage, IPreMessageSentModify, IPreMessageUpdatedModify } from '@rocket.chat/apps-engine/definition/messages';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
 import { ISetting } from '@rocket.chat/apps-engine/definition/settings';
 import { MessageHandler } from './src/handler/MessageHandler';
 import { Settings } from './src/settings/Settings';
 
-export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
+export class YouTrackLinkerApp extends App implements IPreMessageSentModify, IPreMessageUpdatedModify {
 
     private readonly settings: Settings = new Settings();
     private readonly messageHandler: MessageHandler;
@@ -26,12 +26,21 @@ export class YouTrackLinkerApp extends App implements IPreMessageSentModify {
     }
 
     public async checkPreMessageSentModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {
-        return this.messageHandler.checkPreMessageSentModify(message, read, http);
+        return this.messageHandler.checkPreMessageModify(message, read, http);
+    }
+
+    public async checkPreMessageUpdatedModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {
+        return this.messageHandler.checkPreMessageModify(message, read, http);
     }
 
     // tslint:disable-next-line:max-line-length
     public async executePreMessageSentModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
-        return this.messageHandler.executePreMessageSentModify(message, builder, read, http, persistence);
+        return this.messageHandler.executePreMessageModify(message, builder, read, http, persistence);
+    }
+
+    // tslint:disable-next-line:max-line-length
+    public async executePreMessageUpdatedModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
+        return this.messageHandler.executePreMessageModify(message, builder, read, http, persistence);
     }
 
     public async onEnable(environmentRead: IEnvironmentRead, configModify: IConfigurationModify): Promise<boolean> {

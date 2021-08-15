@@ -66,7 +66,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.true;
             });
             it('issue in attachment', async () => {
                 message.text = 'There is no any issue in message text';
@@ -74,7 +74,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.true;
             });
             it('undefinded message text and issue in attachment', async () => {
                 message.text = undefined;
@@ -82,7 +82,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.true;
             });
             it('empty message text and issue in attachment', async () => {
                 message.text = '';
@@ -90,7 +90,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.true;
             });
             it('issue in message text and attachment', async () => {
                 message.text = 'There is an issue in message text: TEST-10';
@@ -98,7 +98,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.true;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.true;
             });
         });
 
@@ -107,21 +107,21 @@ describe('MessageHandler', () => {
                 message.text = 'There is no any issue in message text';
                 const messageHandler = new MessageHandler(settings);
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
             it('undefinded message text and no any attachment', async () => {
                 message.text = undefined;
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
             it('empty message text and no any attachment', async () => {
                 message.text = '';
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
             it('undefinded message text and no any issue in attachment', async () => {
                 message.text = undefined;
@@ -129,14 +129,14 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
             it('empty message text and no any attachment', async () => {
                 message.text = '';
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
             it('no any issue in message text and attachment', async () => {
                 message.text = 'There is no any issue in message text';
@@ -144,7 +144,7 @@ describe('MessageHandler', () => {
                 const messageHandler = new MessageHandler(settings);
 
                 // tslint:disable-next-line: no-unused-expression
-                expect(await messageHandler.checkPreMessageSentModify(message, read, http)).to.be.false;
+                expect(await messageHandler.checkPreMessageModify(message, read, http)).to.be.false;
             });
         });
     });
@@ -154,21 +154,21 @@ describe('MessageHandler', () => {
             message.text = 'There is an issue in message text: TEST-10';
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).text)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).text)
                 .to.not.equal(message.text);
         });
         it('should return the same message text', async () => {
             message.text = 'There is no any issue in message text';
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).text)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).text)
                 .to.equal(message.text);
         });
         it('should return the same message text', async () => {
             message.text = undefined;
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).text)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).text)
                 .to.equal(message.text);
         });
 
@@ -177,7 +177,7 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: 'There is an issue in attachment: TEST-10' }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.not.eql(message.attachments);
         });
         it('should return the same attachment', async () => {
@@ -185,7 +185,7 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: 'There is no any issue in attachment' }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.eql(message.attachments);
         });
         it('should return the same attachment', async () => {
@@ -193,7 +193,7 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: undefined }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.eql(message.attachments);
         });
         it('should return the same attachment', async () => {
@@ -201,7 +201,7 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: '' }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.eql(message.attachments);
         });
 
@@ -210,9 +210,9 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: 'There is an issue in attachment: TEST-10' }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).text)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).text)
                 .to.not.equal(message.text);
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.not.eql(message.attachments);
         });
         it('should return the same message text and attachment', async () => {
@@ -220,9 +220,9 @@ describe('MessageHandler', () => {
             message.attachments = [{ text: 'There is no any issue in attachment' }];
             const messageHandler = new MessageHandler(settings);
 
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).text)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).text)
                 .to.equal(message.text);
-            expect((await messageHandler.executePreMessageSentModify(message, messageBuilder, read, http, persistence)).attachments)
+            expect((await messageHandler.executePreMessageModify(message, messageBuilder, read, http, persistence)).attachments)
                 .to.eql(message.attachments);
         });
     });
