@@ -1,9 +1,9 @@
 import { IHttp, IMessageBuilder, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
-import { IMessage, IMessageAttachment, IPreMessageSentModify } from '@rocket.chat/apps-engine/definition/messages';
+import { IMessage, IMessageAttachment } from '@rocket.chat/apps-engine/definition/messages';
 import { Settings } from '../settings/Settings';
 import { TextMessage } from './TextMessage';
 
-export class MessageHandler implements IPreMessageSentModify {
+export class MessageHandler {
 
     private readonly settings: Settings;
 
@@ -11,7 +11,7 @@ export class MessageHandler implements IPreMessageSentModify {
         this.settings = settings;
     }
 
-    public async checkPreMessageSentModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {
+    public async checkPreMessageModify(message: IMessage, read: IRead, http: IHttp): Promise<boolean> {
         if (message.text && await this.hasIssues(message.text)) {
             return true;
         }
@@ -28,7 +28,7 @@ export class MessageHandler implements IPreMessageSentModify {
     }
 
     // tslint:disable-next-line:max-line-length
-    public async executePreMessageSentModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
+    public async executePreMessageModify(message: IMessage, builder: IMessageBuilder, read: IRead, http: IHttp, persistence: IPersistence): Promise<IMessage> {
         if (message.text) {
             await this.modifyText(message.text).then((messageText) => builder.setText(messageText));
         }

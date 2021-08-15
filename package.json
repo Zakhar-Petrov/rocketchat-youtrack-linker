@@ -9,7 +9,8 @@
         "test": "mocha -r ts-node/register **/*.test.ts",
         "coverage": "nyc npm run test",
         "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-        "package": "rc-apps package"
+        "package": "rc-apps package",
+        "submit": "rc-apps submit"
     },
     "pre-commit": [
         "lint",
