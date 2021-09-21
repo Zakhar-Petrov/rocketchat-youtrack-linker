@@ -9,8 +9,8 @@
         "test": "mocha -r ts-node/register **/*.test.ts",
         "coverage": "nyc npm run test",
         "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-        "package": "rc-apps package",
-        "submit": "rc-apps submit"
+        "package": "rc-apps version && rc-apps package",
+        "submit": "rc-apps version && rc-apps submit"
     },
     "pre-commit": [
         "lint",
@@ -21,8 +21,8 @@
     },
     "devDependencies": {
         "@istanbuljs/nyc-config-typescript": "^1.0.1",
-        "@rocket.chat/apps-cli": "^1.6.0",
-        "@rocket.chat/apps-engine": "^1.12.0",
+        "@rocket.chat/apps-cli": "^1.9.0",
+        "@rocket.chat/apps-engine": "^1.15.0",
         "@types/chai": "^4.2.12",
         "@types/mocha": "^8.0.3",
         "@types/node": "^10.17.29",
